@@ -1,16 +1,13 @@
 #include "config.h"
 #include "tg_bot.h"
 
-extern UniversalTelegramBot bot;
-
 void setup() {
   DEBUG_BEGIN(115200);
 
-  initWiFi();
+  connectToWifi();
   initTGBot();
-  initBlynk();
-  // connectToWifi();
-  ConnectBlynk();
+
+  BOT_SEND("Система запущена");
 }
 
 void loop() {

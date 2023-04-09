@@ -1,15 +1,13 @@
 #include <WiFiClientSecure.h>
 #include <UniversalTelegramBot.h>
 
-unsigned long bot_lasttime;  // время последнего входящего сообщения в ТГ
-const unsigned long BOT_MTBS = 1000;         // время опроса входящих сообщений
-String sendMsg;                                       //переменная для сообщений
-// X509List cert(TELEGRAM_CERTIFICATE_ROOT);
+unsigned long bot_lasttime;           // время последнего входящего сообщения в ТГ
+const unsigned long BOT_MTBS = 1000;  // время опроса входящих сообщений
+String sendMsg;                       //переменная для сообщений
 WiFiClientSecure telegramClient;
 UniversalTelegramBot bot(BOT_TOKEN, telegramClient);
 
 void initTGBot() {
-  // telegramClient.setTrustAnchors(&cert);  // сертификат для api.telegram.org
   telegramClient.setInsecure();
   DEBUG_PRINTLN("Бот настроен");
 }
