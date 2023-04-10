@@ -1,10 +1,10 @@
 #include <BlynkSimpleEsp8266.h>
 #include "tg_bot.h"
 
-#define BLYNK_PRINT Serial                         // хз зачем Serial для блинка
+#define BLYNK_PRINT Serial  // хз зачем Serial для блинка
 
-void initBlynk(){
-  Blynk.config(BLYNK_TOKEN, BLYNK_SERVER, 8080); 
+void initBlynk() {
+  Blynk.config(BLYNK_TOKEN, BLYNK_SERVER, 8080);
 }
 
 /*Подключение к Blynk*/
@@ -22,7 +22,7 @@ bool ConnectBlynk(void) {
     }
     i++;
   }
-  
+
   if (state) {
     sendMsg = "Blynk подключен";
   } else {
