@@ -11,5 +11,6 @@ void setup() {
 }
 
 void loop() {
+  handleOTA();
   checkNewMsg();  //проверка сообщений ТГ ботом
 }
