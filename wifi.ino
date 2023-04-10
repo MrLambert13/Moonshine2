@@ -25,10 +25,10 @@ void connectToWifi() {
     DEBUG_PRINTLN("OTA Done!");
   });
   ArduinoOTA.onProgress([](unsigned int progress, unsigned int total) {
-    DEBUG_PRINTLN("OTA Progress: %u%%\r", (progress / (total / 100)));
+    Serial.printf("OTA Progress: %u%%\r", (progress / (total / 100)));
   });
   ArduinoOTA.onError([](ota_error_t error) {
-    DEBUG_PRINTLN("Error[%u]: ", error);
+    Serial.printf("Error[%u]: ", error);
     if (error == OTA_AUTH_ERROR) DEBUG_PRINTLN("Auth Failed");
     else if (error == OTA_BEGIN_ERROR) DEBUG_PRINTLN("Begin Failed");
     else if (error == OTA_CONNECT_ERROR) DEBUG_PRINTLN("Connect Failed");
