@@ -9,6 +9,7 @@ UniversalTelegramBot bot(BOT_TOKEN, telegramClient);
 
 void initTGBot() {
   telegramClient.setInsecure();
+  bot_setup();
   DEBUG_PRINTLN("Бот настроен");
 }
 
@@ -35,25 +36,25 @@ void handleNewMessages(int numNewMessages) {
 }
 
 /*Команды чата для бота
-/blynk - Connect to Blynk
-/status - System and sensors info
-/sensinit - Initialize sensors
-/templim - Setup start temp notifycation
-/waterOff - Close tap
-/waterOn - Open tap
-/boilOn - 220 ON
-/boilOff - 220 OFF
-/stop - Stop system, close tap 
+/blynk - Подключение к серверу Blynk
+/status - Получить данные с датчиков
+/sensinit - Провести заного иниц-ю датчиков
+/templim - Установить температуру начала оповещений
+/waterOff - Закрыть воду
+/waterOn - Открыть воду
+/boilOn - Включить нагрузку 220
+/boilOff - Выключить нагрузку 220
+/stop - Остановить систему
 */
 void bot_setup() {
-  const String commands = F("[{\"command\":\"blynk\",\"description\":\"Connect to Blynk\"},"
-                            // "{\"command\":\"status\",\"description\":\"System and sensors info\"},"
-                            // "{\"command\":\"sensinit\",\"description\":\"Initialize sensors\"},"
-                            // "{\"command\":\"templim\",\"description\":\"Setup start temp notifycation\"},"
-                            // "{\"command\":\"waterOff\",\"description\":\"Close tap\"},"
-                            // "{\"command\":\"waterOn\",\"description\":\"Open tap\"},"
-                            // "{\"command\":\"boilOn\",\"description\":\"220 ON\"},"
-                            "{\"command\":\"boilOff\",\"description\":\"220 OFF\"},"
-                            "{\"command\":\"stop\",\"description\":\"Stop system, close tap\"}]");
+  const String commands = F("[{\"command\":\"blynk\",\"description\":\"Подключение к серверу Blynk\"},"
+                            "{\"command\":\"status\",\"description\":\"Получить данные с датчиков\"},"
+                            "{\"command\":\"templim\",\"description\":\"Установить температуру начала оповещений\"},"
+                            "{\"command\":\"sensinit\",\"description\":\"Провести заного иниц-ю датчиков\"},"
+                            "{\"command\":\"waterOff\",\"description\":\"Закрыть воду\"},"
+                            "{\"command\":\"waterOn\",\"description\":\"Открыть воду\"},"
+                            "{\"command\":\"boilOn\",\"description\":\"Включить нагрузку 220\"},"
+                            "{\"command\":\"boilOff\",\"description\":\"Выключить нагрузку 220\"},"
+                            "{\"command\":\"stop\",\"description\":\"Остановить систему\"}]");
   bot.setMyCommands(commands);
 }

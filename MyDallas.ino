@@ -56,3 +56,38 @@ void sensorsInit() {
   DEBUG_PRINTLN(sendMsg);
   BOT_SEND(sendMsg);
 }
+
+/*Получить температуру всех датчиков*/
+void getTemps() {
+  sensors.requestTemperatures();
+  for (int i = 0; i < countSensors; i++) {
+    temps[i] = sensors.getTempCByIndex(i);
+    DEBUG_PRINTLN(String(printAddress(sensorsUnique[i])).substring(36) + " - " + temps[i]);
+  }
+}
+
+/*Уведомления по температуре*/
+void tempNotify(bool all = false) {
+  float cubeT = sensors.getTempC(cubeTermometer);
+  // if (cubeT > END_CUBE_TEMP) boilEnd();
+  if (cubeT < CUBE_TEMP_LIM && cubeT != -127) return;
+  for (byte i = 0; i < countSensors; i++) {
+    //if alrady notify this temp or less then CUBE_TEMP_LIM - break
+    if (!all && (int(temps[i]) == lastSndTemp[i])) continue;
+    //main notify IF
+    if ((int(temps[i]) % 5 == 0 || !lastSndTemp[i] || lastSndTemp[i] - temps[i] > 4) && temps[i] > CUBE_TEMP_LIM || all) {
+      String str = "Sensor " + String(i) + ": " + temps[i];
+      BOT_SEND(str);
+      lastSndTemp[i] = int(temps[i]);
+    }
+  }
+}
+
+//Обновление температуры по таймауту
+void tempsUpdate(){
+  if (millis() - lastTimeSensUpd > SENSOR_TIME_UPD) {
+    getTemps();
+    tempNotify();
+    lastTimeSensUpd = millis();
+  }
+}
