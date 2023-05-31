@@ -1,6 +1,5 @@
 #include <ESP8266WiFi.h>
 #include <ArduinoOTA.h>
-#include "tg_bot.h"
 
 void connectToWifi() {
   WiFi.mode(WIFI_STA);

@@ -31,6 +31,10 @@ void handleNewMessages(int numNewMessages) {
   String answer;
   for (int i = 0; i < numNewMessages; i++) {
     telegramMessage &msg = bot.messages[i];
+
+    if (msg.text == "/1") heatRelay.toggle();
+    if (msg.text == "/2") C2H5OHRelay.toggle();
+    if (msg.text == "/3") waterRelay.toggle();
   }
   BOT_SEND(answer);
 }
@@ -53,8 +57,6 @@ void bot_setup() {
                             "{\"command\":\"sensinit\",\"description\":\"Провести заного иниц-ю датчиков\"},"
                             "{\"command\":\"waterOff\",\"description\":\"Закрыть воду\"},"
                             "{\"command\":\"waterOn\",\"description\":\"Открыть воду\"},"
-                            "{\"command\":\"boilOn\",\"description\":\"Включить нагрузку 220\"},"
-                            "{\"command\":\"boilOff\",\"description\":\"Выключить нагрузку 220\"},"
                             "{\"command\":\"stop\",\"description\":\"Остановить систему\"}]");
   bot.setMyCommands(commands);
 }
